@@ -33,8 +33,8 @@ export default function Login() {
 
       // Mock authentication - in real app this would be an API call
       if (
-        credentials.username === "director" &&
-        credentials.password === "edubase123"
+        credentials.username === "directormain" &&
+        credentials.password === "director1234"
       ) {
         // Check if director is already activated
         const isActivated =
