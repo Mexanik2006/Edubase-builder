@@ -989,7 +989,7 @@ export default function StaffManagement() {
                   <div className="grid grid-cols-2 gap-6">
                     <div>
                       <h4 className="font-medium mb-3 flex items-center">
-                        <User className="w-4 h-4 mr-2" />
+                        <Users className="w-4 h-4 mr-2" />
                         Shaxsiy ma'lumotlar
                       </h4>
                       <div className="space-y-2 text-sm">
