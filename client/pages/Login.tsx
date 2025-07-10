@@ -139,7 +139,7 @@ export default function Login() {
                     {showUserList ? (
                       <X className="w-4 h-4" />
                     ) : (
-                      <User className="w-4 h-4" />
+                      <UserIcon className="w-4 h-4" />
                     )}
                   </Button>
                 </div>
