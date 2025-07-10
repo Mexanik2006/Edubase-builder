@@ -9,6 +9,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Activation from "./pages/Activation";
 import Dashboard from "./pages/Dashboard";
+import AdminActivation from "./pages/AdminActivation";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
