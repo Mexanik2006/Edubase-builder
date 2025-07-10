@@ -11,6 +11,9 @@ import Activation from "./pages/Activation";
 import Dashboard from "./pages/Dashboard";
 import AdminActivation from "./pages/AdminActivation";
 import AdminDashboard from "./pages/AdminDashboard";
+import EducationDashboard from "./pages/EducationDashboard";
+import StaffManagement from "./pages/StaffManagement";
+import GroupsManagement from "./pages/GroupsManagement";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
