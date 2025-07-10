@@ -57,6 +57,15 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        edubase: {
+          blue: "hsl(var(--edubase-blue))",
+          "blue-dark": "hsl(var(--edubase-blue-dark))",
+          "blue-light": "hsl(var(--edubase-blue-light))",
+          gray: "hsl(var(--edubase-gray))",
+          "gray-light": "hsl(var(--edubase-gray-light))",
+        },
+        success: "hsl(var(--success))",
+        warning: "hsl(var(--warning))",
       },
       borderRadius: {
         lg: "var(--radius)",
