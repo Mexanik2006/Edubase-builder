@@ -11,7 +11,13 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Loader2, BookOpen, User, CheckCircle, X } from "lucide-react";
+import {
+  Loader2,
+  BookOpen,
+  User as UserIcon,
+  CheckCircle,
+  X,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { USERS, authenticateUser, type User } from "@/lib/constants";
 
