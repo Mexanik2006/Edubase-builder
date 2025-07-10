@@ -27,7 +27,7 @@ const sidebarItems = [
   {
     title: "Dashboard",
     icon: Home,
-    href: "/admin-dashboard",
+    href: "/admin-dashboard/education",
     key: "dashboard",
   },
   {
