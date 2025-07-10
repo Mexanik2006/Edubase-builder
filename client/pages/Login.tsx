@@ -9,9 +9,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Loader2, BookOpen } from "lucide-react";
+import { Loader2, BookOpen, User, CheckCircle, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { USERS, authenticateUser, type User } from "@/lib/constants";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({
@@ -20,6 +22,7 @@ export default function Login() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showUserList, setShowUserList] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -31,18 +34,36 @@ export default function Login() {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      // Mock authentication - in real app this would be an API call
-      if (
-        credentials.username === "directormain" &&
-        credentials.password === "director1234"
-      ) {
-        // Check if director is already activated
-        const isActivated =
-          localStorage.getItem("director_activated") === "true";
-        if (isActivated) {
-          navigate("/dashboard");
-        } else {
-          navigate("/activation");
+      const user = authenticateUser(credentials.username, credentials.password);
+
+      if (user) {
+        if (user.role === "director") {
+          // Check if director is already activated
+          const isActivated =
+            localStorage.getItem("director_activated") === "true";
+          if (isActivated) {
+            navigate("/dashboard");
+          } else {
+            navigate("/activation");
+          }
+        } else if (user.role === "admin") {
+          // Store current admin info
+          localStorage.setItem("current_admin", JSON.stringify(user));
+
+          if (user.isActive) {
+            // Check if admin is already activated
+            const adminActivationKey = `admin_${user.username}_activated`;
+            const isAdminActivated =
+              localStorage.getItem(adminActivationKey) === "true";
+
+            if (isAdminActivated) {
+              navigate("/admin-dashboard");
+            } else {
+              navigate("/admin-activation");
+            }
+          } else {
+            navigate("/admin-activation");
+          }
         }
       } else {
         setError("Login yoki parol noto'g'ri");
@@ -57,6 +78,14 @@ export default function Login() {
   const handleInputChange = (field: string, value: string) => {
     setCredentials((prev) => ({ ...prev, [field]: value }));
     if (error) setError("");
+  };
+
+  const selectUser = (user: User) => {
+    setCredentials({
+      username: user.username,
+      password: user.password,
+    });
+    setShowUserList(false);
   };
 
   return (
@@ -78,7 +107,7 @@ export default function Login() {
               Tizimga kirish
             </CardTitle>
             <CardDescription>
-              Director sifatida tizimga kirishingiz kerak
+              Foydalanuvchi sifatida tizimga kirishingiz kerak
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -88,6 +117,68 @@ export default function Login() {
                   <AlertDescription>{error}</AlertDescription>
                 </Alert>
               )}
+
+              {/* Demo Users Section */}
+              <div className="mb-4">
+                <div className="flex items-center justify-between mb-3">
+                  <Label className="text-sm font-medium text-gray-700">
+                    Test foydalanuvchilari
+                  </Label>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowUserList(!showUserList)}
+                  >
+                    {showUserList ? (
+                      <X className="w-4 h-4" />
+                    ) : (
+                      <User className="w-4 h-4" />
+                    )}
+                  </Button>
+                </div>
+
+                {showUserList && (
+                  <div className="space-y-2 p-3 bg-gray-50 rounded-lg border max-h-64 overflow-y-auto">
+                    {USERS.map((user) => (
+                      <div
+                        key={user.username}
+                        className="flex items-center justify-between p-2 bg-white rounded border cursor-pointer hover:bg-gray-50 transition-colors"
+                        onClick={() => selectUser(user)}
+                      >
+                        <div className="flex-1">
+                          <div className="flex items-center space-x-2 mb-1">
+                            <span className="text-sm font-medium">
+                              {user.displayName}
+                            </span>
+                            {user.isActive ? (
+                              <Badge
+                                variant="secondary"
+                                className="bg-green-100 text-green-800 text-xs"
+                              >
+                                <CheckCircle className="w-3 h-3 mr-1" />
+                                Aktiv
+                              </Badge>
+                            ) : (
+                              <Badge variant="outline" className="text-xs">
+                                Faol emas
+                              </Badge>
+                            )}
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            {user.username} / {user.password}
+                          </div>
+                          {user.projectName && (
+                            <div className="text-xs text-edubase-gray">
+                              {user.projectName}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
 
               <div className="space-y-2">
                 <Label htmlFor="username">Login</Label>
@@ -141,8 +232,7 @@ export default function Login() {
               <p className="text-xs text-center text-edubase-gray">
                 Login va parolingiz EduBase tomonidan beriladi.
                 <br />
-                Agar sizda login va parol bo'lmasa, administrator bilan
-                bog'laning.
+                Test uchun yuqoridagi foydalanuvchilardan birini tanlang.
               </p>
             </div>
           </CardContent>
