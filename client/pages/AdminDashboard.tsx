@@ -57,6 +57,13 @@ export default function AdminDashboard() {
     }
 
     const admin = JSON.parse(adminString) as User;
+
+    // Redirect education admins to their specific dashboard
+    if (admin.projectId === "education") {
+      navigate("/admin-dashboard/education");
+      return;
+    }
+
     setCurrentAdmin(admin);
 
     // Check if admin is activated
