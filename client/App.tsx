@@ -14,6 +14,13 @@ import AdminDashboard from "./pages/AdminDashboard";
 import EducationDashboard from "./pages/EducationDashboard";
 import StaffManagement from "./pages/StaffManagement";
 import GroupsManagement from "./pages/GroupsManagement";
+import StatisticsPage from "./pages/StatisticsPage";
+import SubjectsPage from "./pages/SubjectsPage";
+import SchedulePage from "./pages/SchedulePage";
+import LessonsPage from "./pages/LessonsPage";
+import SettingsPage from "./pages/SettingsPage";
+import HelpPage from "./pages/HelpPage";
+import NotificationsPage from "./pages/NotificationsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
