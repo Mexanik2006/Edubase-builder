@@ -51,6 +51,28 @@ function App() {
               path="/admin-dashboard/groups"
               element={<GroupsManagement />}
             />
+            <Route
+              path="/admin-dashboard/statistics"
+              element={<StatisticsPage />}
+            />
+            <Route
+              path="/admin-dashboard/subjects"
+              element={<SubjectsPage />}
+            />
+            <Route
+              path="/admin-dashboard/schedule"
+              element={<SchedulePage />}
+            />
+            <Route path="/admin-dashboard/lessons" element={<LessonsPage />} />
+            <Route
+              path="/admin-dashboard/settings"
+              element={<SettingsPage />}
+            />
+            <Route path="/admin-dashboard/help" element={<HelpPage />} />
+            <Route
+              path="/admin-dashboard/notifications"
+              element={<NotificationsPage />}
+            />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
