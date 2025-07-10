@@ -27,6 +27,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/activation" element={<Activation />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/admin-activation" element={<AdminActivation />} />
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
