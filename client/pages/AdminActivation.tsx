@@ -73,6 +73,25 @@ export default function AdminActivation() {
     if (directorData) {
       const data = JSON.parse(directorData);
       setBranches(data.centerInfo.branches || []);
+    } else {
+      // If no director data, create mock branches for demo
+      setBranches([
+        {
+          name: "Asosiy filial",
+          location: "Toshkent, Yunusobod tumani",
+          description: "Markazning asosiy filiali",
+        },
+        {
+          name: "Samarqand filiali",
+          location: "Samarqand shahar, Registon ko'chasi",
+          description: "Samarqanddagi filial",
+        },
+        {
+          name: "Farg'ona filiali",
+          location: "Farg'ona shahar, Mustaqillik ko'chasi",
+          description: "Farg'ona viloyatidagi filial",
+        },
+      ]);
     }
   }, [navigate]);
 
