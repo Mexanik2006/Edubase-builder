@@ -57,17 +57,27 @@ export default function Login() {
           localStorage.setItem("current_admin", JSON.stringify(user));
 
           if (user.isActive) {
-            // Check if admin is already activated
+            // Active users go directly to dashboard (simulate they're already activated)
             const adminActivationKey = `admin_${user.username}_activated`;
-            const isAdminActivated =
-              localStorage.getItem(adminActivationKey) === "true";
+            localStorage.setItem(adminActivationKey, "true");
 
-            if (isAdminActivated) {
-              navigate("/admin-dashboard");
-            } else {
-              navigate("/admin-activation");
-            }
+            // Set some mock activation data for active users
+            localStorage.setItem(
+              `admin_${user.username}_data`,
+              JSON.stringify({
+                personalInfo: {
+                  fullName: user.displayName.split(" - ")[0],
+                  email: `${user.username}@edubase.uz`,
+                  phone: `+998 90 ${Math.floor(Math.random() * 900) + 100} ${Math.floor(Math.random() * 90) + 10} ${Math.floor(Math.random() * 90) + 10}`,
+                },
+                selectedBranch: "Asosiy filial",
+                activationDate: new Date().toISOString(),
+              }),
+            );
+
+            navigate("/admin-dashboard");
           } else {
+            // Inactive users must go through activation
             navigate("/admin-activation");
           }
         }
