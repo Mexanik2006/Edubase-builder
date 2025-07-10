@@ -32,6 +32,18 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/admin-activation" element={<AdminActivation />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route
+              path="/admin-dashboard/education"
+              element={<EducationDashboard />}
+            />
+            <Route
+              path="/admin-dashboard/staff"
+              element={<StaffManagement />}
+            />
+            <Route
+              path="/admin-dashboard/groups"
+              element={<GroupsManagement />}
+            />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
